@@ -10470,7 +10470,18 @@ async function loadConfig(){
   try{ const s=await getDoc(doc(db,"config","app")); if(s.exists()&&s.data().visionKey){ visionKey=s.data().visionKey; } }catch(e){}
   $("visionState").textContent = visionKey ? "Vision: uključen" : "Vision: nije podešen (⚙️)";
 }
-window.saveVisionKey = async function(){
+window.openSettingsModal = function() {
+    const n = localStorage.getItem('vania_op') || '';
+    document.getElementById('settingsNameInput').value = n;
+    document.getElementById('settingsModal').style.display = 'flex';
+  }
+  window.saveSettings = function() {
+    const name = document.getElementById('settingsNameInput').value.trim();
+    if (name) { localStorage.setItem('vania_op', name); document.getElementById('whoName').textContent = name; }
+    window.saveVisionKey();
+    document.getElementById('settingsModal').style.display = 'none';
+  }
+	window.saveVisionKey = async function(){
   const k=$("visionKeyInput").value.trim();
   if(!CONFIGURED){ alert("Prvo Firebase."); return; }
   try{ await setDoc(doc(db,"config","app"),{visionKey:k},{merge:true}); visionKey=k;
