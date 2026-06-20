@@ -118,7 +118,7 @@
     <div class="logo">V</div>
     <h1>OEE VANIA · Cloud</h1>
     <button class="gear" onclick="document.getElementById('settingsModal').style.display='flex'" title="Podešavanja">⚙️</button>
-    <div class="who" id="who"><span class="tag">operater</span><b id="whoName">—</b></div>
+    <div class="who" id="who" onclick="openSettingsModal()" style="cursor:pointer" title="Klikni za promenu imena"><span class="tag">operater ✏️</span><b id="whoName">—</b></div>
   </header>
 
   <div class="tabs">
@@ -272,10 +272,13 @@
 <div class="modal" id="settingsModal">
   <div class="box">
     <h3>Podešavanja</h3>
+	  <label class="fld" style="margin-top:0">👤 Ime i prezime operatera</label>
+<input type="text" id="settingsNameInput" placeholder="Ime i prezime" autocomplete="name">
+<hr style="border:none;border-top:1px solid var(--line);margin:14px 0 10px">
     <p>Google Vision API ključ (za automatsko čitanje papira). Čuva se u bazi — operateri ga ne unose.</p>
     <input type="text" id="visionKeyInput" placeholder="AIza... (Vision API key)" autocomplete="off">
     <div style="margin-top:14px; display:flex; gap:8px">
-      <button class="btn primary" style="flex:1" onclick="saveVisionKey()">Sačuvaj</button>
+      <button class="btn primary" style="flex:1" onclick="saveSettings()">Sačuvaj</button>
       <button class="btn ghost" style="flex:1" onclick="document.getElementById('settingsModal').style.display='none'">Zatvori</button>
     </div>
   </div>
